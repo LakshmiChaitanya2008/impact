@@ -5,6 +5,7 @@ import Editor from "../../components/Editor";
 import Modals from "../../components/modals";
 import SettingsDD from "../../components/SettingsDD";
 import { manageCategory, manageNoteModal } from "../../jotai/atoms";
+
 export default function index() {
   const [isOpen, setIsOpen] = useAtom(manageNoteModal);
   const [manageCategoryOpen, setManageCategoryOpen] = useAtom(manageCategory);
