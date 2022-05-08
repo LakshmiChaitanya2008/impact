@@ -1,3 +1,26 @@
+@import url("http://fonts.cdnfonts.com/css/circular-std");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+body {
+  @apply bg-base text-white;
+  font-family: "Circular Std", sans-serif;
+}
+
+.ql-editor {
+  @apply text-lg;
+}
+
+input,
+select {
+  @apply bg-base border-primary border-2 p-2 w-full;
+}
+
+.mantine-Modal-modal {
+  @apply bg-base text-white;
+}
+
+.mantine-Modal-title {
+  @apply text-lg;
+}
