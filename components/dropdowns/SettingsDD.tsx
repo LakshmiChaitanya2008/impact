@@ -1,7 +1,7 @@
 import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
 import { useAtom } from "jotai";
 import { MoreHorizontal } from "react-feather";
-import { newCategoryModal, newNoteModal } from "../jotai/atoms";
+import { newCategoryModal, newNoteModal } from "../../jotai/atoms";
 
 export default function SettingsDD() {
   const [newNoteOpen, setNewNoteOpen] = useAtom(newNoteModal);
