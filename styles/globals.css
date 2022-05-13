@@ -17,10 +17,23 @@ select {
   @apply bg-base border-primary border-2 p-2 w-full;
 }
 
-.mantine-Modal-modal {
+.mantine-Modal-modal,
+.mantine-RichTextEditor-toolbar {
   @apply bg-base text-white;
 }
 
 .mantine-Modal-title {
   @apply text-lg;
+}
+
+.mantine-RichTextEditor-toolbar {
+  @apply border-t-[1px] border-white;
+}
+
+.mantine-RichTextEditor-root {
+  @apply bg-base text-white h-screen w-full;
+}
+
+ul {
+  list-style-type: circle;
 }

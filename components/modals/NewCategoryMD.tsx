@@ -1,7 +1,7 @@
 import { Modal } from "@mantine/core";
 import { useAtom } from "jotai";
 import React from "react";
-import { newCategoryModal } from "../../jotai/atoms";
+import { newCategoryModal } from "../../store/atoms";
 
 export default function NewCategoryMD() {
   const [isOpen, setIsOpen] = useAtom(newCategoryModal);

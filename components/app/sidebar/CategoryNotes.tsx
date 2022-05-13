@@ -1,7 +1,7 @@
 import { useAtom } from "jotai";
 import React from "react";
 import { ChevronRight, Edit2 } from "react-feather";
-import { manageCategory } from "../../../jotai/atoms";
+import { manageCategory } from "../../../store/atoms";
 import Note from "./Note";
 
 export default function CategoryNotes() {
@@ -14,6 +14,7 @@ export default function CategoryNotes() {
           <ChevronRight className="" />
           Persons
         </div>
+        y
         <div>
           <Edit2
             size={20}
@@ -21,10 +22,7 @@ export default function CategoryNotes() {
           />
         </div>
       </h1>
-      <div className="ml-3">
-        <Note name="YoNote" />
-        <Note name="BoopNote" />
-      </div>
+      <div className="ml-3"></div>
     </div>
   );
 }

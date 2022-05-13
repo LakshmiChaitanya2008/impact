@@ -1,11 +1,16 @@
 import { useSetAtom } from "jotai";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { currentUser } from "../../jotai/atoms";
-import { supabase } from "../../lib/supabase";
-
+import { currentUser } from "../../store/atoms";
+import { auth, db } from "../../lib/firebase";
+import {
+  AuthError,
+  createUserWithEmailAndPassword as signUp,
+  updateProfile,
+} from "firebase/auth";
+import { setDoc, doc } from "firebase/firestore";
 type FormData = {
   username: string;
   email: string;
@@ -24,19 +29,32 @@ export default function Register() {
     formState: { errors },
   } = useForm<FormData>();
 
-  const handleRegister = handleSubmit(async (e) => {
-    const { error, user } = await supabase.auth.signUp({
-      email: e.email,
-      password: e.password,
-    });
-
-    if (error) {
-      setError(error.message);
-    }
-
-    if (!error) {
-      setUser(user!);
+  useEffect(() => {
+    if (localStorage.getItem("user")) {
       router.push("/app");
+    }
+  }, []);
+
+  const handleRegister = handleSubmit(async (e) => {
+    try {
+      const { user } = await signUp(auth, e.email, e.password);
+
+      await updateProfile(user, {
+        displayName: e.username,
+      });
+
+      await setDoc(
+        doc(db, "users", user.uid),
+        JSON.parse(JSON.stringify({ ...user }))
+      );
+      localStorage.setItem("user", JSON.stringify(user));
+      setUser(user);
+      router.push("/app");
+    } catch (error: AuthError | any) {
+      if (error.message === "Firebase: Error (auth/email-already-in-use).") {
+        setError("Email already in use");
+      }
+      setError(error.message);
     }
   });
 

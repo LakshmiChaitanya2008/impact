@@ -12,7 +12,11 @@ module.exports = {
         white: "#EDEDED",
         gray: "#2E2E2E",
       },
+
+      animation: {
+        "spin-slow": "spin 2s linear infinite",
+      },
     },
   },
-  plugins: [],
+  plugins: [require("@tailwindcss/typography")],
 };

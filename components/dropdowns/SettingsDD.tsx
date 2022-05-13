@@ -1,11 +1,21 @@
 import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
 import { useAtom } from "jotai";
 import { MoreHorizontal } from "react-feather";
-import { newCategoryModal, newNoteModal } from "../../jotai/atoms";
-
+import { currentUser, newCategoryModal, newNoteModal } from "../../store/atoms";
+import { signOut } from "firebase/auth";
+import { auth } from "../../lib/firebase";
+import { useRouter } from "next/router";
 export default function SettingsDD() {
   const [newNoteOpen, setNewNoteOpen] = useAtom(newNoteModal);
   const [newCategoryOpen, setNewCategoryOpen] = useAtom(newCategoryModal);
+  const router = useRouter();
+  const [user, setUser] = useAtom(currentUser);
+  const handleLogOut = () => {
+    signOut(auth);
+    setUser(user);
+    localStorage.removeItem("user");
+    router.push("/");
+  };
 
   return (
     <DropdownMenu.Root>
@@ -33,7 +43,10 @@ export default function SettingsDD() {
         <DropdownMenu.Item className="p-2 hover:bg-gray ">
           Settings
         </DropdownMenu.Item>
-        <DropdownMenu.Item className="p-2 hover:bg-red-600 bg-red-500 rounded-md mb-2">
+        <DropdownMenu.Item
+          className="p-2 hover:bg-red-600 bg-red-500 rounded-md mb-2"
+          onClick={handleLogOut}
+        >
           Log out
         </DropdownMenu.Item>
       </DropdownMenu.Content>

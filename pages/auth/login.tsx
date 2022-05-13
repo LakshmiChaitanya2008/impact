@@ -1,10 +1,13 @@
 import Link from "next/link";
-import { supabase } from "../../lib/supabase";
+import { auth, db } from "../../lib/firebase";
 import { useForm } from "react-hook-form";
-import { useSetAtom } from "jotai";
-import { currentUser } from "../../jotai/atoms";
+import { useAtom } from "jotai";
+import { currentUser } from "../../store/atoms";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { AuthError, signInWithEmailAndPassword as signIn } from "firebase/auth";
+import { collection, doc, setDoc } from "firebase/firestore";
+import { loadavg } from "os";
 
 type FormData = {
   email: string;
@@ -13,9 +16,13 @@ type FormData = {
 
 export default function Login() {
   const router = useRouter();
-  const setUser = useSetAtom(currentUser);
+  const [user, setUser] = useAtom(currentUser);
   const [error, setError] = useState("");
-
+  useEffect(() => {
+    if (localStorage.getItem("user")) {
+      router.push("/app");
+    }
+  }, []);
   const {
     register,
     handleSubmit,
@@ -23,18 +30,17 @@ export default function Login() {
   } = useForm<FormData>();
 
   const handleLogin = handleSubmit(async (e) => {
-    const { error, user } = await supabase.auth.signIn({
-      email: e.email,
-      password: e.password,
-    });
-
-    if (!error) {
+    try {
+      const { user } = await signIn(auth, e.email, e.password);
       setUser(user!);
+      localStorage.setItem("user", JSON.stringify(user));
       router.push("/app");
-    }
-
-    if (error) {
-      setError(error.message);
+    } catch (error: AuthError | any) {
+      if (error.message === "Firebase: Error (auth/user-not-found).") {
+        setError("User not found");
+      } else {
+        setError("Invalid email or password");
+      }
     }
   });
 

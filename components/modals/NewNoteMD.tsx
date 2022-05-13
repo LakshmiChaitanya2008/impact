@@ -1,9 +1,27 @@
 import { Modal } from "@mantine/core";
 import React from "react";
+import { useForm } from "react-hook-form";
 import { useAtom } from "jotai";
-import { newNoteModal } from "../../jotai/atoms";
+import { useNote } from "../../hooks/useNote";
+import { newNoteModal, notesAtom } from "../../store/atoms";
+
+type FormData = {
+  title: string;
+};
+
 export default function NewNoteMD() {
+  const {
+    handleSubmit,
+    register,
+    formState: { errors },
+  } = useForm<FormData>();
   const [isOpen, setIsOpen] = useAtom(newNoteModal);
+  const [notes, setNotes] = useAtom(notesAtom);
+  const { createNote } = useNote();
+  const handleCreate = handleSubmit(async function ({ title }) {
+    await createNote(title, "");
+    setIsOpen(false);
+  });
 
   return (
     <Modal
@@ -12,10 +30,16 @@ export default function NewNoteMD() {
       centered
       title="Create New Note"
       overlayOpacity={0.55}
+      onSubmit={handleCreate}
     >
       <div>
         <form className="">
-          <input type="text" className="mt-6" placeholder="Name" />
+          <input
+            type="text"
+            className="mt-6"
+            placeholder="Name"
+            {...register("title")}
+          />
           <select className="mt-4">
             <option value="no-category">No Category</option>
             <option value="supabase">Supabase</option>

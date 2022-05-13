@@ -1,46 +1,33 @@
+import { useAtom } from "jotai";
 import dynamic from "next/dynamic";
-import React from "react";
+import React, { useEffect } from "react";
+import { currentNote, notesAtom } from "../../../store/atoms";
+import { useNote } from "../../../hooks/useNote";
 
-const QuillEditor = dynamic(() => import("react-quill"), {
+const QuillEditor = dynamic(() => import("@mantine/rte"), {
   ssr: false,
 });
 export default function Editor() {
-  const modules = {
-    toolbar: [
-      [{ header: "1" }, { header: "2" }],
-      ["bold", "italic", "underline", "strike", "blockquote"],
-      [{ list: "ordered" }, { list: "bullet" }],
-      [{ align: "" }, { align: "center" }, { align: "right" }],
-    ],
-    clipboard: {
-      matchVisual: false,
-    },
-  };
+  const [curNote, setCurNote] = useAtom(currentNote);
+  const { updateNote } = useNote();
 
-  const formats = [
-    "header",
-    "align",
-    "font",
-    "size",
-    "bold",
-    "italic",
-    "underline",
-    "strike",
-    "blockquote",
-    "list",
-    "bullet",
-    "indent",
-    "link",
-    "image",
-    "video",
-  ];
-
+  console.log(curNote);
   return (
     <div>
       <QuillEditor
-        modules={modules}
-        formats={formats}
-        className="h-screen border-none text-xl"
+        controls={[
+          ["bold", "italic", "underline"],
+          ["unorderedList", "h1", "h2", "h3"],
+          ["sup", "sub", "blockquote", "code"],
+          ["alignLeft", "alignCenter", "alignRight"],
+        ]}
+        value={curNote?.body}
+        onChange={(val) => setCurNote({ ...curNote, body: val })}
+        onBlur={() =>
+          updateNote({ title: curNote?.title, body: curNote?.body })
+        }
+        className="h-screen border-none text-xl bg-base w-screen"
+        autoCorrect="off"
       />
     </div>
   );
