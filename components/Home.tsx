@@ -5,7 +5,7 @@ import { useAtom } from "jotai";
 import { currentUser } from "../store/atoms";
 
 export default function Home() {
-  const user = localStorage.getItem("user");
+  const [user, setUser] = useAtom(currentUser);
   console.log(user);
   return (
     <>
