@@ -18,7 +18,7 @@ export const useNote = function () {
     getNotes: async () => {
       const notesCollec = collection(
         db,
-        `users/${JSON.parse(localStorage.getItem("user")!).uid}/notes`
+        `users/${JSON.parse(localStorage.getItem("user")!)!.uid}/notes`
       );
 
       const notes = await (
@@ -40,7 +40,7 @@ export const useNote = function () {
       await setDoc(
         doc(
           db,
-          `users/${JSON.parse(localStorage.getItem("user")!).uid}/notes`,
+          `users/${JSON.parse(localStorage.getItem("user")!)!.uid}/notes`,
           randomID
         ),
         note
@@ -55,7 +55,7 @@ export const useNote = function () {
       await deleteDoc(
         doc(
           db,
-          `users/${JSON.parse(localStorage.getItem("user")!).uid}/notes`,
+          `users/${JSON.parse(localStorage.getItem("user")!)!.uid}/notes`,
           id
         )
       );
@@ -67,7 +67,7 @@ export const useNote = function () {
       await updateDoc(
         doc(
           db,
-          `users/${JSON.parse(localStorage.getItem("user")!).uid}/notes`,
+          `users/${JSON.parse(localStorage.getItem("user")!)!.uid}/notes`,
           curNote?.id
         ),
         {

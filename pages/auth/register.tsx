@@ -51,7 +51,7 @@ export default function Register() {
       setUser(user);
       router.push("/app");
     } catch (error: AuthError | any) {
-      if (error.message === "Firebase: Error (auth/email-already-in-use).") {
+      if (error.message === "Firebase: Error(auth/email-already-in-use).") {
         setError("Email already in use");
       }
       setError(error.message);

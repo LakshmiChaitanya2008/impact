@@ -11,7 +11,6 @@ export default function Editor() {
   const [curNote, setCurNote] = useAtom(currentNote);
   const { updateNote } = useNote();
 
-  console.log(curNote);
   return (
     <div>
       <QuillEditor

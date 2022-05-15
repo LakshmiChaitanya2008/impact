@@ -6,8 +6,6 @@ import { currentUser } from "../../store/atoms";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { AuthError, signInWithEmailAndPassword as signIn } from "firebase/auth";
-import { collection, doc, setDoc } from "firebase/firestore";
-import { loadavg } from "os";
 
 type FormData = {
   email: string;

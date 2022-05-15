@@ -3,23 +3,20 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { useAtom } from "jotai";
 import { useNote } from "../../hooks/useNote";
-import { newNoteModal, notesAtom } from "../../store/atoms";
+import { newNoteModal } from "../../store/atoms";
 
 type FormData = {
   title: string;
+  body: string;
 };
 
 export default function NewNoteMD() {
-  const {
-    handleSubmit,
-    register,
-    formState: { errors },
-  } = useForm<FormData>();
+  const { handleSubmit, register, formState } = useForm<FormData>();
   const [isOpen, setIsOpen] = useAtom(newNoteModal);
-  const [notes, setNotes] = useAtom(notesAtom);
   const { createNote } = useNote();
-  const handleCreate = handleSubmit(async function ({ title }) {
-    await createNote(title, "");
+
+  const handleCreate = handleSubmit(async function ({ title, body }) {
+    await createNote(title, body);
     setIsOpen(false);
   });
 
@@ -30,20 +27,22 @@ export default function NewNoteMD() {
       centered
       title="Create New Note"
       overlayOpacity={0.55}
-      onSubmit={handleCreate}
     >
       <div>
-        <form className="">
+        <form onSubmit={handleCreate}>
           <input
             type="text"
             className="mt-6"
             placeholder="Name"
             {...register("title")}
+            required
           />
-          <select className="mt-4">
-            <option value="no-category">No Category</option>
-            <option value="supabase">Supabase</option>
-          </select>
+          <textarea
+            className="mt-3 h-[240px]"
+            placeholder="Body"
+            {...register("body")}
+            required
+          ></textarea>
           <div className="float-right mt-6">
             <button
               className="bg-gray px-5 py-2 rounded-md mx-3"
@@ -51,7 +50,7 @@ export default function NewNoteMD() {
             >
               Cancel
             </button>
-            <button className="bg-primary px-5 py-2 rounded-md">Create</button>
+            <button className="btn">Create</button>
           </div>
         </form>
       </div>

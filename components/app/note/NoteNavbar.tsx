@@ -1,15 +1,11 @@
-import { atom, useAtom } from "jotai";
-import React, { useEffect, useMemo } from "react";
+import { useAtom } from "jotai";
 import { Copy, Edit2, Save, Trash } from "react-feather";
 import { currentNote, manageNoteModal, notesAtom } from "../../../store/atoms";
-import { deleteDoc, doc, updateDoc } from "firebase/firestore";
-import { db } from "../../../lib/firebase";
 import { useNote } from "../../../hooks/useNote";
 
 export default function NoteNavbar() {
   const [isOpen, setIsOpen] = useAtom(manageNoteModal);
   const [curNote, setCurNote] = useAtom(currentNote);
-  const [notes, setNotes] = useAtom(notesAtom);
   const { deleteNote, createNote, updateNote } = useNote();
 
   const handleDelete = async function () {

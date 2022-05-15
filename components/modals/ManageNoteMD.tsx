@@ -11,7 +11,7 @@ type FormData = {
 
 export default function () {
   const [isOpen, setIsOpen] = useAtom(manageNoteModal);
-  const { formState, register, handleSubmit } = useForm<FormData>();
+  const { register, handleSubmit } = useForm<FormData>();
   const { updateNote } = useNote();
   const [curNote, setCurNote] = useAtom(currentNote);
 
@@ -40,10 +40,7 @@ export default function () {
               setCurNote({ ...curNote, title: val.target.value })
             }
           />
-          <select className="mt-4">
-            <option value="no-category">No Category</option>
-            <option value="supabase">Supabase</option>
-          </select>
+
           <div className="float-right mt-6">
             <button
               className="bg-gray px-5 py-2 rounded-md mx-3"
@@ -51,7 +48,7 @@ export default function () {
             >
               Cancel
             </button>
-            <button type="submit" className="bg-primary px-5 py-2 rounded-md">
+            <button type="submit" className="btn">
               Save
             </button>
           </div>

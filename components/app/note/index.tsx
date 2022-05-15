@@ -14,11 +14,11 @@ export default function NoteEditor() {
     }
   }, [curNote]);
   return curNote ? (
-    <div className="lg:w-[77%] w-full h-screen">
+    <div className="lg:w-[77%] w-full h-screen inline">
       <NoteNavbar />
       <Editor />
     </div>
   ) : (
-    <div className="text-xl p-5">No Note Selected</div>
+    <div className="text-xl my-5 mx-2 lg:m-5">No Note Selected</div>
   );
 }
