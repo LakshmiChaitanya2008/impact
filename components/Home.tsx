@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { useAtom } from "jotai";
-import { currentUser } from "../store/atoms";
 
 export default function Home() {
-  const [user, setUser] = useAtom(currentUser);
-  console.log(user);
+  const [user, setUser] = useState<string | null>(null);
+
+  useEffect(() => {
+    setUser(localStorage.getItem("user")!);
+  }, []);
+
   return (
     <>
       <div className="flex justify-between my-0 mx-auto max-w-4xl mt-10">
