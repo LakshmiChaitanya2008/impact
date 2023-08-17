@@ -41,7 +41,7 @@ export default function index({ userNotes }: { userNotes: Note[] }) {
   ) : (
     <div className="flex flex-wrap">
       <div
-        className={`lg:w-[23%] w-[80%] border-r-primary border-r-2 h-screen p-5 lg:block ${
+        className={`lg:w-[23%] w-[80%] border-r-primary border-r h-screen overflow-y-auto p-5 lg:block ${
           showSidebar ? "" : "hidden w-1/2"
         } transition-all duration-300 ease-in-out`}
       >

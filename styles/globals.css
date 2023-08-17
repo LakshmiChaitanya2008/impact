@@ -1,38 +1,46 @@
-@import url("https://fonts.cdnfonts.com/css/circular-std");
+@import url("https://fonts.googleapis.com/css2?family=Epilogue&family=Inter&display=swap");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 body {
   @apply bg-base text-white;
-  font-family: "Circular Std", sans-serif;
+  font-family: "Inter", sans-serif;
 }
 
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Epilogue", sans-serif;
+}
 .ql-editor {
-  @apply text-lg;
+  @apply text-[17px] leading-normal;
 }
 
 input,
 select,
 textarea {
-  @apply bg-base border-primary border-2 p-2 w-full;
+  @apply bg-base border-primary border p-2 w-full rounded-md focus:outline-none;
 }
 
 .mantine-Modal-modal,
 .mantine-RichTextEditor-toolbar {
-  @apply bg-base text-white;
+  @apply bg-base text-white !important;
 }
 
 .mantine-Modal-title {
-  @apply text-lg;
+  @apply text-lg !important;
 }
 
 .mantine-RichTextEditor-toolbar {
-  @apply border-t-[1px] border-white;
+  @apply border-t-[1px] border-white sticky !important;
 }
 
 .mantine-RichTextEditor-root {
-  @apply bg-base text-white h-screen w-full;
+  @apply bg-base text-white h-screen w-full !important;
 }
 
 ul {

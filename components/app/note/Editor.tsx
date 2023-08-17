@@ -20,12 +20,14 @@ export default function Editor() {
           ["sup", "sub", "blockquote", "code"],
           ["alignLeft", "alignCenter", "alignRight"],
         ]}
+        spellCheck={false}
+        onPaste={(e) => e.stopPropagation()}
         value={curNote?.body}
         onChange={(val) => setCurNote({ ...curNote, body: val })}
         onBlur={() =>
           updateNote({ title: curNote?.title, body: curNote?.body })
         }
-        className="h-screen border-none text-xl bg-base w-screen"
+        className="h-screen border-none leading-tight bg-base w-screen"
         autoCorrect="off"
       />
     </div>

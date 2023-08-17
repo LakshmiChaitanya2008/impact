@@ -17,7 +17,7 @@ export default function Note({ note }: NoteProps) {
         setCurNote(note);
         setShowSideBar(false);
       }}
-      className="text-lg p-2 my-2 bg-gray rounded-md"
+      className="text p-2 my-2 bg-gray rounded-md"
     >
       {note.title}
     </div>

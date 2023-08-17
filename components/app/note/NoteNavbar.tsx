@@ -28,11 +28,11 @@ export default function NoteNavbar() {
 
   return (
     <div className="m-3 flex justify-between ">
-      <h1 className="text-2xl">{curNote?.title}</h1>
+      <h1 className="text-xl">{curNote?.title}</h1>
       <div className="flex">
         <button title="Save">
           <Save
-            className="mx-2 hover:text-purple-500 cursor-pointer"
+            className="mx-2 hover:text-yellow-500 cursor-pointer"
             size={23}
             onClick={handleSave}
           />
@@ -44,7 +44,7 @@ export default function NoteNavbar() {
             onClick={handleCopy}
           />
         </button>
-        <button title="Manage Note">
+        <button title="Edit Note">
           <Edit2
             className="mx-2 hover:text-blue-500 cursor-pointer"
             size={23}

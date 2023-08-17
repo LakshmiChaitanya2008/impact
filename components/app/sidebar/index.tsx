@@ -24,16 +24,20 @@ export default function SideBar() {
       <div className="flex justify-between mb-7">
         <h1 className="text-xl">{user?.displayName}</h1>
         <div className="flex">
-          <PlusSquare
-            className="hover:text-blue-400 cursor-pointer mx-4"
-            size={24}
-            onClick={() => setNewNoteOpen(!newNoteOpen)}
-          />
-          <LogOut
-            className="hover:text-red-400 cursor-pointer"
-            size={24}
-            onClick={handleLogOut}
-          />
+          <p title="Create New Note">
+            <PlusSquare
+              className="hover:text-blue-400 cursor-pointer mx-4"
+              size={24}
+              onClick={() => setNewNoteOpen(!newNoteOpen)}
+            />
+          </p>
+          <p title="Logout">
+            <LogOut
+              className="hover:text-red-400 cursor-pointer"
+              size={24}
+              onClick={handleLogOut}
+            />
+          </p>
         </div>
       </div>
 

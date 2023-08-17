@@ -16,7 +16,7 @@ export default function NewNoteMD() {
   const { createNote } = useNote();
 
   const handleCreate = handleSubmit(async function ({ title, body }) {
-    await createNote(title, body);
+    await createNote(title, body ? body : "");
     setIsOpen(false);
   });
 
@@ -41,7 +41,6 @@ export default function NewNoteMD() {
             className="mt-3 h-[240px]"
             placeholder="Body"
             {...register("body")}
-            required
           ></textarea>
           <div className="float-right mt-6">
             <button

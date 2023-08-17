@@ -14,7 +14,7 @@ export default function NoteEditor() {
     }
   }, [curNote]);
   return curNote ? (
-    <div className="lg:w-[77%] w-full h-screen inline">
+    <div className="lg:w-[77%] w-full h-screen overflow-y-auto inline">
       <NoteNavbar />
       <Editor />
     </div>
